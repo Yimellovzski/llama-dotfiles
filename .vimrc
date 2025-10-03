@@ -19,10 +19,16 @@ let g:ale_linters = { 'python': ['flake8'] }
 let g:ale_fixers = { 'python': ['black'] }
 let g:ale_fix_on_save = 1
 
+" Personal keymaps
+nmap ^S :w<CR>
+
 " Custom keymappings for vim-test
 nmap <leader>t :TestNearest<CR>
 nmap <leader>T :TestFile<CR>
 nmap <leader>s :TestSuite<CR>
+
+" Running Python code
+nmap <leader>P :!python3 %<CR>
 
 " Python specific settings
 autocmd Filetype python setlocal tabstop=4 shiftwidth=4 expandtab
@@ -39,6 +45,7 @@ filetype plugin indent on
 set termguicolors
 set background=dark
 let g:gruvbox_contrast_dark = 'soft'
+let g:gruvbox_italic = 1
 autocmd vimenter * ++nested colorscheme gruvbox
 
 " ALE highlight fixes
