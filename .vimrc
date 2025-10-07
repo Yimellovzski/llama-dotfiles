@@ -20,7 +20,11 @@ let g:ale_fixers = { 'python': ['black'] }
 let g:ale_fix_on_save = 1
 
 " Personal keymaps
-nmap ^S :w<CR>
+nmap <leader>w :w<CR>
+nmap <leader>W :wq<CR>
+nmap <leader>q :q<CR>
+nmap <leader>Q :q!<CR>
+
 
 " Custom keymappings
 	" Vim Test
