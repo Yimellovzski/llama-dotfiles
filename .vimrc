@@ -22,10 +22,16 @@ let g:ale_fix_on_save = 1
 " Personal keymaps
 nmap ^S :w<CR>
 
-" Custom keymappings for vim-test
+" Custom keymappings
+	" Vim Test
 nmap <leader>t :TestNearest<CR>
 nmap <leader>T :TestFile<CR>
 nmap <leader>s :TestSuite<CR>
+	" NERDTree
+nmap <leader>\ :NERDTreeToggle<CR>
+nmap <leader>f :NERDTreeFocus<CR>
+nmap <leader>e :NERDTreeExplore<CR>
+
 
 " Running Python code
 nmap <leader>P :!python3 %<CR>
