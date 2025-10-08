@@ -27,10 +27,6 @@ nmap <leader>Q :q!<CR>
 
 
 " Custom keymappings
-	" Vim Test
-nmap <leader>t :TestNearest<CR>
-nmap <leader>T :TestFile<CR>
-nmap <leader>s :TestSuite<CR>
 	" NERDTree
 nmap <leader>\ :NERDTreeToggle<CR>
 nmap <leader>f :NERDTreeFocus<CR>
@@ -57,6 +53,30 @@ set background=dark
 let g:gruvbox_contrast_dark = 'soft'
 let g:gruvbox_italic = 1
 autocmd vimenter * ++nested colorscheme gruvbox
+
+" VIM Transparency toggle
+
+let g:transparency_enabled = 0
+let g:transparent_groups = [
+      \ 'Normal', 'LineNr', 'SignColumn', 'EndOfBuffer', 'ColorColumn',
+      \ 'CursorLineNr', 'TabLine', 'TabLineFill', 'TabLineSel'
+      \ ]
+function! ToggleTransparency()
+  if g:transparency_enabled
+    let g:transparency_enabled = 0
+    execute "silent! colorscheme " . g:colors_name
+    echo "Transparency Disabled"
+  else
+    let g:transparency_enabled = 1
+    for group in g:transparent_groups
+      execute 'highlight ' . group . ' ctermbg=NONE guibg=NONE'
+    endfor
+    echo "Transparency Enabled"
+  endif
+endfunction
+
+command! ToggleTransparency call ToggleTransparency()
+nnoremap <leader>t :call ToggleTransparency()<CR>
 
 " ALE highlight fixes
 " highlight ALEError guifg=#ff5555 guibg=NONE ctermfg=Red ctermbg=NONE
