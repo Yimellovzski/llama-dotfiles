@@ -1,9 +1,18 @@
+[terminal.shell]
+program = "/usr/bin/tmux"
+args = [
+  "new-session",
+  "-A",
+  "-s",
+  "main"
+]
+
 [window.padding]
 x = 10
 y = 10
 
 [window]
-#opacity = 0.95
+opacity = 0.95
 
 [scrolling]
 history = 10000
@@ -38,7 +47,7 @@ cyan = "0x8ec07c"
 white = "0xebdbb2"
 
 [font]
-size = 14.0
+size = 16.0
 
 [font.normal]
 family = "Cascadia Code"
