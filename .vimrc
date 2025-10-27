@@ -23,6 +23,8 @@ Plug 'dense-analysis/ale'
 Plug 'preservim/nerdtree'
 Plug 'ryanoasis/vim-devicons'
 Plug 'mhinz/vim-signify'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 " Writing Plugins "
 " Dependencies "
 Plug 'kana/vim-textobj-user'
@@ -54,11 +56,13 @@ let g:coc_global_extensions = ['coc-json', 'coc-dictionary', 'coc-pyright', 'coc
 " vim-pencil "
 let g:pencil#cursorwrap = 1     " 0=disable, 1=enable (def)
 " vim-lexical "
-let g:lexical#thesaurus = ['~/.vim/thesaurus/mthesaur.txt', '~/.vim/thesaurus/words.txt',]
+let g:lexical#thesaurus = ['~/.vim/thesaurus/mthesaur.txt'] ", '~/.vim/thesaurus/words.txt',]
 let g:lexical#thesaurus_key = '<leader>T'
 " vim-signify " 
 " default updatetime 4000ms is not good for async update
 set updatetime=100
+" Initialize configuration dictionary "
+let g:fzf_vim = {}
 
 """"""""""""
 " KEYBINDS "
@@ -75,23 +79,32 @@ nmap <leader>o :NERDTreeFocus<CR>
 nmap <leader>] :NERDTreeExplore<CR>
 " goyo.vim "
 nmap <leader>g :Goyo<CR>
+" fzf.vim "
+nmap <leader>l :BLines<CR>
 " vim-ditto "
 " Use autocmds to check your text automatically and keep the highlighting
 " up to date (easier):
-au FileType markdown,text,tex DittoOn  " Turn on Ditto's autocmds
-nmap <leader>di <Plug>ToggleDitto      " Turn Ditto on and off
+" au FileType markdown,text,tex DittoOn  " Turn on Ditto's autocmds
+" nmap <leader>di <Plug>ToggleDitto      " Turn Ditto on and off
 
 " If you don't want the autocmds, you can also use an operator to check
 " specific parts of your text:
-" vmap <leader>d <Plug>Ditto	       " Call Ditto on visual selection
-" nmap <leader>d <Plug>Ditto	       " Call Ditto on operator movement
-
-nmap =d <Plug>DittoNext                " Jump to the next word
-nmap -d <Plug>DittoPrev                " Jump to the previous word
-nmap +d <Plug>DittoGood                " Ignore the word under the cursor
-nmap _d <Plug>DittoBad                 " Stop ignoring the word under the cursor
-nmap ]d <Plug>DittoMore                " Show the next matches
-nmap [d <Plug>DittoLess                " Show the previous matches
+" Call Ditto on visual selection "
+vmap <leader>sv <Plug>Ditto
+" Call Ditto on operator movement "
+nmap <leader>so <Plug>Ditto
+" Jump to the next word "
+nmap =d <Plug>DittoNext 
+" Jump to the previous word "
+nmap -d <Plug>DittoPrev
+" Ignore the word under the cursor "
+nmap +d <Plug>DittoGood
+" Stop ignoring the word under the cursor "
+nmap _d <Plug>DittoBad
+" Show the next matches "
+nmap ]d <Plug>DittoMore
+" Show the previous matches "
+nmap [d <Plug>DittoLess
 
 """"""""""""""""""""
 " GENERAL SETTINGS "
@@ -121,7 +134,7 @@ autocmd! User GoyoLeave nested call <SID>goyo_leave()
 
 " Function to enable prose plugins "
 function! Prose()
-  Limelight!!
+  Limelight!!0.9
   PencilToggle
   setl spell spl=en_us fdl=4 noru nonu nornu
   setl fdo+=search
